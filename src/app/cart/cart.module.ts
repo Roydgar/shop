@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartComponent } from './components/cart/cart.component';
-import { ProductsModule } from '../products/products.module';
 import { MatButtonModule } from '@angular/material/button';
+import { CartListComponent } from './components/cart-list/cart-list.component';
+import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [CartComponent],
+  declarations: [CartComponent, CartListComponent, CartItemComponent],
   imports: [
     CommonModule,
     MatButtonModule,
-    ProductsModule
+    MatExpansionModule,
+    MatListModule,
+    MatIconModule
   ],
   exports: [CartComponent]
 })
-export class CartModule { }
+export class CartModule {
+}
