@@ -1,0 +1,14 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{product.name}} <div *ngIf="product.isAvailable"> (Available) </div>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <mat-list>
+    <mat-list-item> Name: {{product.name}} </mat-list-item>
+    <mat-list-item> Description: {{product.description}} </mat-list-item>
+    <mat-list-item> Price: {{product.price}} </mat-list-item>
+    <mat-list-item> Category: {{product.category}} </mat-list-item>
+    <mat-list-item> Is available: {{product.isAvailable}} </mat-list-item>
+  </mat-list>
+</mat-expansion-panel>
