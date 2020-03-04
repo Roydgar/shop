@@ -1,0 +1,11 @@
+<form>
+  <div *ngFor="let cartItem of cartItems">
+    <app-cart-item [cartItem]="cartItem"></app-cart-item>
+    <button mat-button (click)="onIncreaseQuantityClick($event, cartItem.id)">Inc</button>
+    <button mat-button (click)="onDecreaseQuantityClick($event, cartItem.id)">Dec</button>
+    <button mat-button (click)="onDeleteClick($event, cartItem.id)">Delete</button>
+  </div>
+
+  <div>Total Price: {{totalPrice}}</div>
+  <button mat-button (click)="onClearCartClick($event)">Clear Cart</button>
+</form>

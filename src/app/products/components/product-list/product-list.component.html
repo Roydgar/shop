@@ -1,6 +1,6 @@
 <form>
   <div *ngFor="let product of products">
     <app-product [product]="product"></app-product>
-    <button *ngIf="product.isAvailable" mat-flat-button color="accent" (click)="onBuy($event, product)">Buy</button>
+    <button [disabled]="!product.isAvailable" mat-flat-button color="accent" (click)="onBuy($event, product)">Buy {{product.name}}</button>
   </div>
 </form>

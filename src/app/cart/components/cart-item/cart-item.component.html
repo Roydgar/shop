@@ -1,0 +1,13 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{cartItem.product.name}}. Quantity: {{cartItem.quantity}}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <mat-list appElementHighlight [color]="'yellow'">
+    <mat-list-item> Name: {{cartItem.product.name}} </mat-list-item>
+    <mat-list-item> Description: {{cartItem.product.description}} </mat-list-item>
+    <mat-list-item> Price: {{cartItem.product.price}} </mat-list-item>
+    <mat-list-item> Category: {{cartItem.product.category}} </mat-list-item>
+  </mat-list>
+</mat-expansion-panel>

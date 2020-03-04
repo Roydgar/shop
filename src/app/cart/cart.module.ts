@@ -7,11 +7,13 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [CartComponent, CartListComponent, CartItemComponent],
   imports: [
     CommonModule,
+    SharedModule,
     MatButtonModule,
     MatExpansionModule,
     MatListModule,

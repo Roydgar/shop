@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartModule } from './cart/cart.module';
 import { ProductsModule } from './products/products.module';
 import { CartService } from './shared/services/cart.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CartService } from './shared/services/cart.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     CartModule,
-    ProductsModule
+    ProductsModule,
+    MatButtonModule
   ],
   providers: [CartService],
   bootstrap: [AppComponent]

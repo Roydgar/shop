@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../../products/models/product.model';
+import { Product } from '../models/product.model';
 import { CartItem } from '../../cart/models/cart-item';
 import { Observable, Subject } from 'rxjs';
 
@@ -17,23 +17,34 @@ export class CartService {
     return this.cartItems.reduce((sum, item) => (sum + item.product.price) * item.quantity, 0);
   }
 
-  deleteItem(index: number): void {
-    this.cartItems = this.cartItems.splice(index, 1);
+  deleteItem(cartItemId: number): void {
+    this.cartItems = this.cartItems.filter(item => item.id !== cartItemId);
+    this.channel.next(this.cartItems);
   }
 
-  increaseQuantity(index: number): void {
-    this.cartItems[index].quantity++;
+  increaseQuantity(cartItemId: number): void {
+    this.findById(cartItemId).quantity++;
   }
 
-  decreaseQuantity(index: number): void {
-    if (this.cartItems[index].quantity > 0) {
-      this.cartItems[index].quantity--;
+  decreaseQuantity(cartItemId: number): void {
+    const cartItem = this.findById(cartItemId);
+    if (cartItem.quantity > 0) {
+      cartItem.quantity--;
+    }
+
+    if (cartItem.quantity === 0) {
+      this.deleteItem(cartItemId);
     }
   }
 
   publishProduct(product: Product): void {
-    this.cartItems.push(new CartItem(product, 1));
-    this.channel.next(this.cartItems);
+    const cartItem = this.findById(product.id);
+    if (cartItem === null) {
+      this.cartItems.push(new CartItem(product.id, product, 1));
+      this.channel.next(this.cartItems);
+    } else {
+      cartItem.quantity++;
+    }
   }
 
   clearProducts(): void {
@@ -43,5 +54,9 @@ export class CartService {
 
   getChannel(): Observable<CartItem[]> {
     return this.channel$;
+  }
+
+  private findById(cartItemId: number): CartItem | null {
+    return this.cartItems.find(item => item.id === cartItemId) || null;
   }
 }
