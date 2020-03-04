@@ -14,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     SharedModule,
+    // желательно перенести эти модули в SharedModule
     MatButtonModule,
     MatExpansionModule,
     MatListModule,
