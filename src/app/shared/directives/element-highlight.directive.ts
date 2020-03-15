@@ -13,7 +13,7 @@ export class ElementHighlightDirective {
 
   @HostBinding('style.fontWeight')
   get fontWeight() {
-    return 'bald';
+    return 'bald'; // bold?
   }
 
   @HostListener('mouseenter')

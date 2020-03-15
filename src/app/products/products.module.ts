@@ -13,12 +13,13 @@ import { MatDialogModule } from '@angular/material/dialog';
   declarations: [ProductComponent, ProductListComponent],
   imports: [
     CommonModule,
+    // обычно эти модули подключают в SharedModule, а его тут
     MatButtonModule,
     MatListModule,
     MatExpansionModule,
     MatDialogModule
   ],
   exports: [ProductListComponent],
-  providers: [ProductService, CartService]
+  providers: [ProductService, CartService] // CartService уже зарегистрирован в AppModule, можно тут убрать
 })
 export class ProductsModule { }

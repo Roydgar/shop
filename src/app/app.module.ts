@@ -21,7 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
     ProductsModule,
     MatButtonModule
   ],
-  providers: [CartService],
+  providers: [CartService], // немного устаревший способ регистрации сервисов
   bootstrap: [AppComponent]
 })
 export class AppModule {
