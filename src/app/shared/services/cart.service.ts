@@ -3,7 +3,9 @@ import { Product } from '../models/product.model';
 import { CartItem } from '../../cart/models/cart-item';
 import { Observable, Subject } from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class CartService {
 
   private channel = new Subject<CartItem[]>();
