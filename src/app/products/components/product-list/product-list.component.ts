@@ -21,6 +21,6 @@ export class ProductListComponent implements OnInit {
 
   onBuy(event: Event, product: Product): void {
     event.preventDefault();
-    this.cartService.publishProduct(product);
+    this.cartService.addProduct(product);
   }
 }

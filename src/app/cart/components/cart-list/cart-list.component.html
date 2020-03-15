@@ -6,6 +6,7 @@
     <button mat-button (click)="onDeleteClick($event, cartItem.id)">Delete</button>
   </div>
 
-  <div>Total Price: {{totalPrice}}</div>
+  <div>Total Price: {{this.cartService.totalPrice}}</div>
+  <div>Total Quantity: {{this.cartService.totalQuantity}}</div>
   <button mat-button (click)="onClearCartClick($event)">Clear Cart</button>
 </form>
