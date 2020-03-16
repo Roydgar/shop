@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartModule } from './cart/cart.module';
 import { ProductsModule } from './products/products.module';
 import { MatButtonModule } from '@angular/material/button';
+import { AboutModule } from './about/about.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserAnimationsModule,
     CartModule,
     ProductsModule,
+    AboutModule,
     MatButtonModule
   ],
   bootstrap: [AppComponent]

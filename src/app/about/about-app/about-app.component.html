@@ -1,0 +1,27 @@
+<h2>About Component</h2>
+<p>{{constantService.app}}; version: {{constantService.version}}</p>
+<p appBorderOnMouseLeave> Here is a random string special for you: {{randomValue}}. Click On Me To Get A Cool Border! </p>
+<br>
+
+<h2>Let's work with local storage:</h2>
+<mat-form-field>
+  <mat-label>Key</mat-label>
+  <input #keyInput matInput>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Value</mat-label>
+  <input #valueInput matInput>
+</mat-form-field>
+
+<button mat-button (click)="onSaveToStorageClick()">Save To Local Storage </button>
+
+<br>
+
+<mat-form-field>
+  <mat-label>Enter here to find</mat-label>
+  <input matInput (keyup)="onGetByKey($event)">
+</mat-form-field>
+
+<div *ngIf="localStorageValue; else elseBlock">Found value: {{localStorageValue}}</div>
+<ng-template #elseBlock>Value by your key is absent</ng-template>
