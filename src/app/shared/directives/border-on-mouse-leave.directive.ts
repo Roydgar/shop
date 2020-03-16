@@ -1,15 +1,16 @@
 import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { GeneratorService } from '../../core/services/generator.service';
 
 @Directive({
   selector: '[appBorderOnMouseLeave]'
 })
 export class BorderOnMouseLeaveDirective {
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) { }
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, private generatorService: GeneratorService) { }
 
   @HostListener('click')
   onMouseLeave() {
-    const randomColor = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
-    this.renderer.setStyle(this.elementRef.nativeElement, 'border', '5px solid ' + randomColor);
+    const style = '5px solid ' + this.generatorService.randomColor();
+    this.renderer.setStyle(this.elementRef.nativeElement, 'border', style);
   }
 }
