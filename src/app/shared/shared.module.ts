@@ -9,9 +9,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BorderOnMouseLeaveDirective } from './directives/border-on-mouse-leave.directive';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { OrderByPipe } from './pipes/sort-array.pipe';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [ElementHighlightDirective, BorderOnMouseLeaveDirective],
+  declarations: [ElementHighlightDirective, BorderOnMouseLeaveDirective, OrderByPipe],
   exports: [
     ElementHighlightDirective,
     BorderOnMouseLeaveDirective,
@@ -21,7 +23,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIconModule,
     MatDialogModule,
     MatInputModule,
-    MatFormFieldModule
+    MatSelectModule,
+    MatFormFieldModule,
+    OrderByPipe,
+    CommonModule
   ],
   imports: [
     CommonModule

@@ -73,6 +73,7 @@ export class CartService {
   private updateCartData() {
     this.calculateQuantity();
     this.calculateTotalPrice();
+    this.cartItems = this.cartItems.map(cartItem => Object.assign({}, cartItem));
   }
 
   private calculateQuantity(): void {

@@ -1,3 +1,4 @@
 export enum ProductCategory {
-  PHONE, PC
+  PHONE = 'Phone',
+  PC = 'PC'
 }

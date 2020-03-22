@@ -1,5 +1,5 @@
 <form>
-  <div *ngFor="let product of products">
+  <div *ngFor="let product of products$ | async">
     <app-product [product]="product"></app-product>
     <button [disabled]="!product.isAvailable" mat-flat-button color="accent" (click)="onBuy($event, product)">Buy {{product.name}}</button>
   </div>

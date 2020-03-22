@@ -1,5 +1,22 @@
 <form>
-  <div *ngFor="let cartItem of cartItems">
+  <mat-form-field>
+    <mat-label>Sort cart by</mat-label>
+    <mat-select (selectionChange)="onChangeSelectOption($event)">
+      <mat-option *ngFor="let orderByKey of orderByOptionsKeys" [value]="orderByOptions[orderByKey]">
+        {{orderByKey | titlecase}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Sort Order</mat-label>
+    <mat-select (selectionChange)="onChangeSortDirectionOption($event)">
+      <mat-option *ngFor="let sortDirectionKey of sortDirectionKeys" [value]="sortDirections[sortDirectionKey]">
+        {{sortDirectionKey | titlecase}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngFor="let cartItem of cartItems$ | async | orderBy:selectedOrderOption:selectedSortDirection">
     <app-cart-item [cartItem]="cartItem"></app-cart-item>
     <button mat-button (click)="onIncreaseQuantityClick($event, cartItem.id)">Inc</button>
     <button mat-button (click)="onDecreaseQuantityClick($event, cartItem.id)">Dec</button>
