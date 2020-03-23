@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CartService } from '../../../shared/services/cart.service';
-import { Observable } from 'rxjs';
-import { CartItem } from '../../models/cart-item';
+
 import { OrderByOption } from '../../enums/order-by-option.enum';
 import { MatSelectChange } from '@angular/material/select';
 import { SortDirection } from '../../enums/sort-direction.enum';
@@ -19,7 +18,7 @@ export class CartListComponent {
 
   sortDirections = SortDirection;
   sortDirectionKeys = Object.keys(SortDirection);
-  selectedSortDirection = SortDirection.ASC;
+  selectedSortDirection = SortDirection.DESC;
 
   constructor(public cartService: CartService) {
   }
