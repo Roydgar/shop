@@ -57,7 +57,7 @@ export class CartService {
     this.updateCartData();
   }
 
-  getChannel(): Observable<CartItem[]> {
+  getCartItems(): Observable<CartItem[]> {
     return this.channel$;
   }
 

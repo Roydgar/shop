@@ -17,7 +17,7 @@
     </mat-select>
   </mat-form-field>
 
-  <div *ngFor="let cartItem of cartItems$ | async | orderBy:selectedOrderOption:selectedSortDirection">
+  <div *ngFor="let cartItem of cartService.getCartItems() | async | orderBy:selectedOrderOption:selectedSortDirection">
     <app-cart-item [cartItem]="cartItem"></app-cart-item>
     <button mat-button (click)="onIncreaseQuantityClick($event, cartItem.id)">Inc</button>
     <button mat-button (click)="onDecreaseQuantityClick($event, cartItem.id)">Dec</button>

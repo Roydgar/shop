@@ -11,9 +11,7 @@ import { SortDirection } from '../../enums/sort-direction.enum';
   templateUrl: './cart-list.component.html',
   styleUrls: ['./cart-list.component.css']
 })
-export class CartListComponent implements OnInit {
-
-  cartItems$: Observable<CartItem[]>;
+export class CartListComponent {
 
   orderByOptions = OrderByOption;
   orderByOptionsKeys = Object.keys(OrderByOption);
@@ -24,10 +22,6 @@ export class CartListComponent implements OnInit {
   selectedSortDirection = SortDirection.ASC;
 
   constructor(public cartService: CartService) {
-  }
-
-  ngOnInit(): void {
-    this.cartItems$ = this.cartService.getChannel();
   }
 
   onDeleteClick(event: Event, cartItemId: number): void {

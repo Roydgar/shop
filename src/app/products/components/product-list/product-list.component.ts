@@ -1,23 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Product } from '../../../shared/models/product.model';
 import { CartService } from '../../../shared/services/cart.service';
 import { ProductService } from '../../services/product.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent  {
 
-  products$: Observable<Product[]>;
-
-  constructor(private cartService: CartService, private productService: ProductService) {
-  }
-
-  ngOnInit(): void {
-    this.products$ = this.productService.getProducts();
+  constructor(public productService: ProductService, private cartService: CartService) {
   }
 
   onBuy(event: Event, product: Product): void {
