@@ -22,7 +22,6 @@ export class CartService {
     const cartItem = this.findById(product.id);
     if (cartItem === null) {
       this.cartItems.push(new CartItem(product.id, product, 1));
-      this.channel.next(this.cartItems);
     } else {
       cartItem.quantity++;
     }
@@ -33,8 +32,6 @@ export class CartService {
   deleteItem(cartItemId: number): void {
     this.cartItems = this.cartItems.filter(item => item.id !== cartItemId);
     this.updateCartData();
-
-    this.channel.next(this.cartItems);
   }
 
   increaseQuantity(cartItemId: number): void {
@@ -58,8 +55,6 @@ export class CartService {
   clearProducts(): void {
     this.cartItems = [];
     this.updateCartData();
-
-    this.channel.next(this.cartItems);
   }
 
   getChannel(): Observable<CartItem[]> {
@@ -73,7 +68,9 @@ export class CartService {
   private updateCartData() {
     this.calculateQuantity();
     this.calculateTotalPrice();
+
     this.cartItems = this.cartItems.map(cartItem => Object.assign({}, cartItem));
+    this.channel.next(this.cartItems);
   }
 
   private calculateQuantity(): void {

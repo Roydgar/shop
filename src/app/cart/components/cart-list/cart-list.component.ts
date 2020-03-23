@@ -15,13 +15,13 @@ export class CartListComponent implements OnInit {
 
   cartItems$: Observable<CartItem[]>;
 
-  orderByOptionsKeys = Object.keys(OrderByOption);
   orderByOptions = OrderByOption;
-  selectedOrderOption: string;
+  orderByOptionsKeys = Object.keys(OrderByOption);
+  selectedOrderOption: string = OrderByOption.NAME;
 
-  sortDirectionKeys = Object.keys(SortDirection);
   sortDirections = SortDirection;
-  selectedSortDirection: 'asc' | 'desc';
+  sortDirectionKeys = Object.keys(SortDirection);
+  selectedSortDirection = SortDirection.ASC;
 
   constructor(public cartService: CartService) {
   }

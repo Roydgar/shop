@@ -9,7 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BorderOnMouseLeaveDirective } from './directives/border-on-mouse-leave.directive';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { OrderByPipe } from './pipes/sort-array.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
 import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
