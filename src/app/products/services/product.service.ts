@@ -15,6 +15,7 @@ export class ProductService {
   constructor() { }
 
   getProducts(): Observable<Product[]> {
+    // можно проще return of(PRODUCTS);
     return new Observable<Product[]>((observer) => {
       observer.next(PRODUCTS);
       observer.complete();

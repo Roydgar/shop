@@ -10,7 +10,7 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule
   ],
   exports: [ProductListComponent],
-  providers: [ProductService]
+  providers: [ProductService] // почему тут регистрация, а не в самом сервисе?
 })
 export class ProductsModule {
 }

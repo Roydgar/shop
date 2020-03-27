@@ -21,6 +21,7 @@ export class CartService {
   addProduct(product: Product): void {
     const cartItem = this.findById(product.id);
     if (cartItem === null) {
+      // тут мутирование данных
       this.cartItems.push(new CartItem(product.id, product, 1));
     } else {
       cartItem.quantity++;
@@ -30,6 +31,7 @@ export class CartService {
   }
 
   deleteItem(cartItemId: number): void {
+    // а тут немутирвоание. Стоит придерживаться какого-то одного варианта
     this.cartItems = this.cartItems.filter(item => item.id !== cartItemId);
     this.updateCartData();
   }
