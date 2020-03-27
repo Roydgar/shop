@@ -12,7 +12,7 @@ export class GeneratorService {
   private charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
   constructor() { }
 
-  next(n: number): string {
+  next(n: number): string { // не стоит так называть метод, обычно такой метод в итераторах или observer
     let result = '';
 
     for (let i = 0; i < n; i++) {

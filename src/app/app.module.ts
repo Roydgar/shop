@@ -20,7 +20,7 @@ import { AboutModule } from './about/about.module';
     CartModule,
     ProductsModule,
     AboutModule,
-    MatButtonModule
+    MatButtonModule // он подключен в SharedModule, тут лучше подключить SharedModule вместо MatButtonModule
   ],
   bootstrap: [AppComponent]
 })
