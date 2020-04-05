@@ -8,6 +8,8 @@ import { CartModule } from './cart/cart.module';
 import { ProductsModule } from './products/products.module';
 import { MatButtonModule } from '@angular/material/button';
 import { AboutModule } from './about/about.module';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import { AboutModule } from './about/about.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     CartModule,
     ProductsModule,
     AboutModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule,
+    MatToolbarModule,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })

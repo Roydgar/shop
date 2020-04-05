@@ -1,10 +1,35 @@
-<h1 #appTitle> Products </h1>
-<button mat-button (click)="onChangeHeader()">Change Header</button>
+<!--<h1 #appTitle> Products </h1>-->
+<!--<button mat-button (click)="onChangeHeader()">Change Header</button>-->
 
-<app-product-list></app-product-list>
-<p></p>
-<app-cart></app-cart>
+<!--<app-product-list></app-product-list>-->
+<!--<p></p>-->
+<!--<app-cart></app-cart>-->
 
-<br>
-<br>
-<app-about-app></app-about-app>
+<!--<br>-->
+<!--<br>-->
+<!--<app-about-app></app-about-app>-->
+
+<mat-toolbar>
+  <mat-toolbar-row>
+    <h1>Shop</h1>
+    <span class="menu-spacer"></span>
+    <div routerLinkActive="active">
+      <a mat-button routerLink="/home"> Home </a>
+    </div>
+
+    <div routerLinkActive="active">
+      <a mat-button routerLink="/products"> Products </a>
+    </div>
+
+    <div routerLinkActive="active">
+      <a mat-button routerLink="/cart"> Cart </a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<br><br>
+<router-outlet
+  #routerOutlet = "outlet"
+  (activate)="onActivate($event, routerOutlet)"
+  (deactivate)="onDeactivate($event, routerOutlet)">
+</router-outlet>

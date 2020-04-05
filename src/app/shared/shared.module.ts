@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [ElementHighlightDirective, BorderOnMouseLeaveDirective, OrderByPipe],
@@ -25,6 +26,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatCardModule,
     OrderByPipe,
     CommonModule
   ],
