@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConfigOptions } from '../../shared/models/config-options';
+import { ConfigOptions } from '../../shared';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class ConfigOptionsService {
   constructor() { }
 
   setConfig(configOptions: ConfigOptions): void {
-    this.configOptions = configOptions;
+    this.configOptions = { ...this.configOptions, ...configOptions};
   }
 
   getConfig(configOptions: ConfigOptions): ConfigOptions {

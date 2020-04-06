@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../../cart/models/cart-item';
-import { Observable, Subject } from 'rxjs';
-import { Product } from '../models/product.model';
+import { Subject } from 'rxjs';
+import { ProductModel } from '../../products';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +10,14 @@ export class CartService {
 
   totalPrice: number;
   totalQuantity: number;
-
+  cartItems: CartItem[] = [];
   private channel = new Subject<CartItem[]>();
-  private channel$ = this.channel.asObservable();
-  private cartItems: CartItem[] = [];
+  channel$ = this.channel.asObservable();
 
   constructor() {
   }
 
-  addProduct(product: Product): void {
+  addProduct(product: ProductModel): void {
     const cartItem = this.findById(product.id);
     if (cartItem === null) {
       this.cartItems.push(new CartItem(product.id, product, 1));
@@ -52,13 +51,9 @@ export class CartService {
     this.updateCartData();
   }
 
-  clearProducts(): void {
+  clearCart(): void {
     this.cartItems = [];
     this.updateCartData();
-  }
-
-  getCartItems(): Observable<CartItem[]> {
-    return this.channel$;
   }
 
   private findById(cartItemId: number): CartItem | null {

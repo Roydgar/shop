@@ -1,0 +1,57 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Samsung Galaxy",
+      "description": "Phone for real man",
+      "price": 505,
+      "category": "PHONE",
+      "isAvailable": true
+    },
+    {
+      "id": 2,
+      "name": "Iphone 11",
+      "description": "Phone for real woman",
+      "price": 1500,
+      "category": "PHONE",
+      "isAvailable": true
+    },
+    {
+      "id": 3,
+      "name": "Phone for real budget",
+      "description": "Phone for real budget",
+      "price": 200,
+      "isAvailable": true,
+      "category": "Phone"
+    },
+    {
+      "name": "Nokia",
+      "description": "True budget phone",
+      "price": 50,
+      "category": "Phone",
+      "isAvailable": true,
+      "id": 4
+    }
+  ],
+  "orders": [
+    {
+      "cartItems": [
+        {
+          "id": 2,
+          "product": {
+            "id": 2,
+            "name": "Iphone 11",
+            "description": "Phone for real woman",
+            "price": 1500,
+            "category": "PHONE",
+            "isAvailable": true
+          },
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 1500,
+      "totalCount": 1,
+      "id": 1
+    }
+  ]
+}

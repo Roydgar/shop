@@ -1,0 +1,19 @@
+<h2>Confirm your order</h2>
+
+<div *ngFor="let cartItem of order.cartItems">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{cartItem.product.name}}, ({{cartItem.quantity}})</mat-card-title>
+      <mat-card-subtitle>{{cartItem.product.price | currency:'UAH':'symbol-narrow'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <button (click)="onGoBack()" mat-button>Back</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<br><br>
+<div>Total Price: {{this.order.totalPrice}}</div>
+<div>Total Quantity: {{this.order.totalCount}}</div>
+
+<button (click)="confirmOrder()" mat-button>Confirm</button>

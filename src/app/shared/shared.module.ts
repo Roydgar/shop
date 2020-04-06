@@ -11,9 +11,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MessageSnackbarComponent } from './components';
+import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
-  declarations: [ElementHighlightDirective, BorderOnMouseLeaveDirective, OrderByPipe],
+  declarations: [ElementHighlightDirective, BorderOnMouseLeaveDirective, OrderByPipe, MessageSnackbarComponent],
   exports: [
     ElementHighlightDirective,
     BorderOnMouseLeaveDirective,
@@ -25,7 +33,15 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatCardModule,
+    MatSnackBarModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatDividerModule,
     OrderByPipe,
+    MessageSnackbarComponent,
     CommonModule
   ],
   imports: [

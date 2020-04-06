@@ -1,12 +1,13 @@
 import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
-import { GeneratorService } from '../../core/services/generator.service';
+import { GeneratorService } from '../../core';
 
 @Directive({
   selector: '[appBorderOnMouseLeave]'
 })
 export class BorderOnMouseLeaveDirective {
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2, private generatorService: GeneratorService) { }
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, private generatorService: GeneratorService) {
+  }
 
   @HostListener('click')
   onMouseLeave() {

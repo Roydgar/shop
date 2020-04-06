@@ -1,0 +1,33 @@
+<div class="example-container">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input [(ngModel)]="product.name" matInput type="text">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <input [(ngModel)]="product.description" matInput type="text">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Price</mat-label>
+    <input [(ngModel)]="product.price" matInput type="number">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="onChangeProductCategory($event)" [(value)]="selectedProductCategory">
+      <mat-option *ngFor="let category of productCategoryKeys" [value]="category">{{category}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+
+  <mat-checkbox (change)="onIsAvailableCheckBoxClick($event)" [(ngModel)]="product.isAvailable">
+    Is Available
+  </mat-checkbox>
+  <br>
+
+  <button (click)="onSave()" mat-button>Save</button>
+  <button (click)="onGoBack()" mat-button>Back</button>
+
+</div>

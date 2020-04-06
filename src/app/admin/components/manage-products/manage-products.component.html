@@ -1,0 +1,16 @@
+<form>
+  <div *ngFor="let product of data$ | async">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{product.name}}</mat-card-title>
+        <mat-card-subtitle>{{product.price | currency:'UAH':'symbol-narrow'}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button (click)="onEdit(product)" mat-button>Edit</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <button (click)="onAddNewProduct()" mat-button>Add Product</button>
+
+</form>

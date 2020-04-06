@@ -1,7 +1,11 @@
-<form>
+<div *ngIf="areCartItemsEmpty(); else cartItemsBlock">
+  <h3>Your cart is empty</h3>
+</div>
+
+<ng-template #cartItemsBlock>
   <mat-form-field>
     <mat-label>Sort cart by</mat-label>
-    <mat-select  [(value)]="selectedOrderOption" (selectionChange)="onChangeSelectOption($event)">
+    <mat-select (selectionChange)="onChangeSelectOption($event)" [(value)]="selectedOrderOption">
       <mat-option *ngFor="let orderByKey of orderByOptionsKeys" [value]="orderByOptions[orderByKey]">
         {{orderByKey | titlecase}}
       </mat-option>
@@ -10,22 +14,35 @@
 
   <mat-form-field>
     <mat-label>Sort Order</mat-label>
-    <mat-select [(value)]="selectedSortDirection" (selectionChange)="onChangeSortDirectionOption($event)">
+    <mat-select (selectionChange)="onChangeSortDirectionOption($event)" [(value)]="selectedSortDirection">
       <mat-option *ngFor="let sortDirectionKey of sortDirectionKeys" [value]="sortDirections[sortDirectionKey]">
         {{sortDirectionKey | titlecase}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-  <div *ngFor="let cartItem of cartService.getCartItems() | async | orderBy:selectedOrderOption:selectedSortDirection">
-    <app-cart-item [cartItem]="cartItem"></app-cart-item>
+  <div *ngFor="let cartItem of cartItems| orderBy:selectedOrderOption:selectedSortDirection">
 
-    <button mat-button (click)="onIncreaseQuantityClick($event, cartItem.id)">Inc</button>
-    <button mat-button (click)="onDecreaseQuantityClick($event, cartItem.id)">Dec</button>
-    <button mat-button (click)="onDeleteClick($event, cartItem.id)">Delete</button>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{cartItem.product.name}}, ({{cartItem.quantity}})</mat-card-title>
+        <mat-card-subtitle>{{cartItem.product.price | currency:'UAH':'symbol-narrow'}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button (click)="onViewInfo(cartItem)" mat-button>More</button>
+        <button (click)="onIncreaseQuantityClick($event, cartItem.id)" mat-button>+</button>
+        <button (click)="onDecreaseQuantityClick($event, cartItem.id)" mat-button>-</button>
+        <button (click)="onDeleteClick($event, cartItem.id)" mat-button>Delete</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 
+  <br><br>
   <div>Total Price: {{this.cartService.totalPrice}}</div>
   <div>Total Quantity: {{this.cartService.totalQuantity}}</div>
-  <button mat-button (click)="onClearCartClick($event)">Clear Cart</button>
-</form>
+  <button (click)="onClearCartClick($event)" mat-button>Clear Cart</button>
+</ng-template>
+
+<div *ngIf="!areCartItemsEmpty()">
+  <button (click)="confirmOrder()" mat-button>Checkout</button>
+</div>
