@@ -8,5 +8,6 @@ export class ConstantsService {
   app: string;
   version: string;
 
-  constructor() { }
+  constructor() {
+  }
 }

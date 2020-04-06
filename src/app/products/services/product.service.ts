@@ -1,30 +1,58 @@
-import { Injectable } from '@angular/core';
-import { Product } from '../../shared/models/product.model';
-import { ProductCategory } from '../enums/product-category.enum';
-import { Observable, of } from 'rxjs';
+import { Inject, Injectable } from '@angular/core';
+import { ProductModel } from '../models/product.model';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { productsAPI } from '../products.config';
+import { catchError } from 'rxjs/operators';
 
-const PRODUCTS = [
-  new Product(1, 'Samsung Galaxy', 'Phone for real man', 500, ProductCategory.PHONE, true),
-  new Product(2, 'Iphone 11', 'Phone for real woman', 1500, ProductCategory.PHONE, true),
-  new Product(3, 'Xiaomi', 'Phone for real budget', 100, ProductCategory.PHONE, false),
-];
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductService {
 
-  private products: Product[];
-
-  constructor() { }
-
-  getProducts(): Observable<Product[]> {
-    return new Observable<Product[]>((observer) => {
-      this.products = PRODUCTS;
-      observer.next(PRODUCTS);
-      observer.complete();
-    });
+  constructor(private http: HttpClient,
+              @Inject(productsAPI) private baseUrl: string) {
   }
 
-  getProductById(id: number): Observable<Product> {
-    return of(this.products.find(product => product.id === id));
+  private static handleError(err: HttpErrorResponse) {
+    if (err.error instanceof Error) {
+      console.error('An error occurred:', err.error.message);
+    } else {
+      console.error(`Backend returned code ${err.status}, body was: ${err.error}`);
+    }
+    return throwError('Something bad happened; please try again later.');
+  }
+
+  getProducts(): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(this.baseUrl).pipe(
+      catchError(ProductService.handleError)
+    );
+  }
+
+  getProductById(id: number): Observable<ProductModel> {
+    const url = this.baseUrl + '/' + id;
+    return this.http.get<ProductModel>(url).pipe(
+      catchError(ProductService.handleError)
+    );
+  }
+
+  createProduct(product: ProductModel): void {
+    const url = `${this.baseUrl}`;
+    const body = JSON.stringify(product);
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+
+    this.http.post<ProductModel>(url, body, options).toPromise();
+  }
+
+  updateProduct(product: ProductModel): void {
+    const url = `${this.baseUrl}/${product.id}`;
+    const body = JSON.stringify(product);
+    const options = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    };
+
+    this.http.put<ProductModel>(url, body, options).toPromise();
   }
 }

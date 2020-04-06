@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export function generatorFactory(n: number) {
-  return (generatorService: GeneratorService): string  => generatorService.next(n);
+  return (generatorService: GeneratorService): string => generatorService.randomString(n);
 }
 
 @Injectable({
@@ -10,9 +10,11 @@ export function generatorFactory(n: number) {
 export class GeneratorService {
 
   private charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
-  constructor() { }
 
-  next(n: number): string {
+  constructor() {
+  }
+
+  randomString(n: number): string {
     let result = '';
 
     for (let i = 0; i < n; i++) {

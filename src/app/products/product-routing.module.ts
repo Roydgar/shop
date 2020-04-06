@@ -1,18 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductListComponent } from './components/product-list/product-list.component';
-import { ProductComponent } from './components/product/product.component';
-import { HOME_PATH, VIEW_PRODUCT_PATH } from '../routes';
+import { ProductComponent, ProductListComponent } from './components';
+import { ProductResolveGuard } from './guards/product-resolve.guard';
 
 const routes: Routes = [
   {
-    path: HOME_PATH,
-    component: ProductListComponent
-  },
-  {
-    path: VIEW_PRODUCT_PATH,
-    component: ProductComponent
-  },
+    path: 'products',
+    children: [
+      {
+        path: '',
+        component: ProductListComponent
+      },
+      {
+        path: ':productID',
+        component: ProductComponent,
+        resolve: {
+          product: ProductResolveGuard
+        }
+      },
+    ]
+  }
 ];
 
 @NgModule({
@@ -20,4 +27,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class ProductRoutingModule {
+  static components = [ProductComponent, ProductListComponent];
 }

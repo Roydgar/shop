@@ -1,17 +1,31 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { PathNotFoundComponent } from './layout/path-not-found/path-not-found.component';
-import { HOME_PATH, NOT_FOUND_PATH } from './routes';
-
+import { RouterModule, Routes } from '@angular/router';
+import { PathNotFoundComponent } from './layout';
+import { AboutAppComponent } from './about';
+import { LoginComponent } from './layout';
+import { AuthGuard } from './core';
 
 const routes: Routes = [
   {
+    path: 'home',
+    component: AboutAppComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'admin',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+  },
+  {
     path: '',
-    redirectTo: '/' + HOME_PATH,
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {
-    path: NOT_FOUND_PATH,
+    path: 'not-found',
     component: PathNotFoundComponent
   },
   {

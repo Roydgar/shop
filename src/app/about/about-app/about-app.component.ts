@@ -1,7 +1,5 @@
 import { Component, ElementRef, Inject, InjectionToken, OnInit, Optional, ViewChild } from '@angular/core';
-import { ConstantsService } from '../../core/services/constants.service';
-import { generatorFactory, GeneratorService } from '../../core/services/generator.service';
-import { LocalStorageService } from '../../core/services/local-storage.service';
+import { ConstantsService, generatorFactory, GeneratorService, LocalStorageService } from '../../core';
 
 const RANDOM_VALUE_TOKEN = new InjectionToken<string>('randomValue');
 

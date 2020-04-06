@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { CartComponent } from './components/cart/cart.component';
-import { CART_PATH } from '../routes';
-
+import { RouterModule, Routes } from '@angular/router';
+import { CartComponent } from './components';
+import { CartListComponent } from './components';
 
 const routes: Routes = [
   {
-    path: CART_PATH,
-    component: CartComponent
+    path: 'cart',
+    component: CartComponent,
+    children: [
+      {
+        path: '',
+        component: CartListComponent,
+      }
+    ]
   }
 ];
 
@@ -15,4 +20,6 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CartRoutingModule { }
+export class CartRoutingModule {
+  static components = [CartComponent, CartListComponent];
+}

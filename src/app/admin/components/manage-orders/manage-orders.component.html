@@ -1,0 +1,18 @@
+<form>
+  <div *ngFor="let order of data$ | async">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Order #{{order.id}}</mat-card-title>
+        <mat-card-subtitle>{{order.totalPrice | currency:'UAH':'symbol-narrow'}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list *ngFor="let cartItem of order.cartItems">
+          <mat-list-item>Product: {{cartItem.product.name}}</mat-list-item>
+          <mat-list-item>Price: {{cartItem.product.price}}</mat-list-item>
+          <mat-list-item>Quantity: {{cartItem.quantity}}</mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</form>

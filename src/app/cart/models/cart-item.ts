@@ -1,10 +1,10 @@
-import { Product } from '../../shared/models/product.model';
+import { ProductModel } from '../../products';
 
 export class CartItem {
 
   constructor(
     public id: number,
-    public product: Product,
+    public product: ProductModel,
     public quantity: number
   ) {
   }
