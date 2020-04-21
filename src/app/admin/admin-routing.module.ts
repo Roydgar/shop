@@ -8,6 +8,7 @@ import { ProductFormComponent } from './components/manage-products';
 import { ProductResolveGuard } from '../products';
 import { AuthGuard } from '../core';
 import { ManageOrdersComponent } from './components';
+import { ProductsStatePreloadingGuard } from '../products/guards/products-state-preloading.guard';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
           },
           {
             path: 'products',
+            canActivate: [ProductsStatePreloadingGuard],
             children: [
               {
                 path: 'add',

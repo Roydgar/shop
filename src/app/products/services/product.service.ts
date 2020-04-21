@@ -36,23 +36,23 @@ export class ProductService {
     );
   }
 
-  createProduct(product: ProductModel): void {
+  createProduct(product: ProductModel): Observable<ProductModel> {
     const url = `${this.baseUrl}`;
     const body = JSON.stringify(product);
     const options = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
 
-    this.http.post<ProductModel>(url, body, options).toPromise();
+    return this.http.post<ProductModel>(url, body, options);
   }
 
-  updateProduct(product: ProductModel): void {
+  updateProduct(product: ProductModel): Observable<ProductModel> {
     const url = `${this.baseUrl}/${product.id}`;
     const body = JSON.stringify(product);
     const options = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
 
-    this.http.put<ProductModel>(url, body, options).toPromise();
+    return this.http.put<ProductModel>(url, body, options);
   }
 }

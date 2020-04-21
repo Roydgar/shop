@@ -1,34 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductModel } from '../../../../products';
 import { ProductCategory } from '../../../../products';
 import { ActivatedRoute, UrlTree } from '@angular/router';
 import { Location } from '@angular/common';
-import { ProductService } from '../../../../products';
-import { pluck } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+  import { pluck, switchMap } from 'rxjs/operators';
+import { Observable, of, Subscription } from 'rxjs';
 import { DialogService } from '../../../../core';
 import { CanComponentDeactivate } from '../../../../core';
 import { MatSelectChange } from '@angular/material/select';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MessageSnackbarComponent } from '../../../../shared/components';
+import { ProductsFacade } from '../../../../core/@ngrx/products/products.facade';
+import { RouterFacade } from '../../../../core/@ngrx/router/router.facade';
 
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
 })
-export class ProductFormComponent implements OnInit, CanComponentDeactivate {
+export class ProductFormComponent implements OnInit, OnDestroy, CanComponentDeactivate {
 
   product: ProductModel;
-  originalProduct: ProductModel;
 
   selectedProductCategory: ProductCategory;
   productCategoryKeys = Object.keys(ProductCategory);
 
+  private sub: Subscription;
+
   constructor(private route: ActivatedRoute,
-              private location: Location,
-              private productService: ProductService,
+              private productsFacade: ProductsFacade,
+              private routerFacade: RouterFacade,
               private dialogService: DialogService,
               private snackBar: MatSnackBar) {
   }
@@ -37,20 +39,22 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     this.loadProduct();
   }
 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
   onGoBack() {
-    this.location.back();
+    this.routerFacade.goBack();
   }
 
   onSave() {
     const product = {...this.product};
 
     if (product.id) {
-      this.productService.updateProduct(product);
+      this.productsFacade.updateProduct(product);
     } else {
-      this.productService.createProduct(product);
+      this.productsFacade.createProduct(product);
     }
-
-    this.originalProduct = {...this.product};
 
     this.snackBar.openFromComponent(MessageSnackbarComponent, {
       data: 'Product was Saved!'
@@ -63,14 +67,25 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const flags = Object.keys(this.product).map(key => {
-      return this.product[key] === this.originalProduct[key];
-    });
+    const flags = [];
 
-    if (flags.every(el => el)) {
-      return true;
-    }
-    return this.dialogService.confirm('Discard changes?');
+    return this.productsFacade.selectOriginalProduct().pipe(
+      switchMap(originalProduct => {
+        for (const key in originalProduct) {
+          if (originalProduct[key] === this.product[key]) {
+            flags.push(true);
+          } else {
+            flags.push(false);
+          }
+        }
+
+        if (flags.every(el => el)) {
+          return of(true);
+        }
+
+        return this.dialogService.confirm('Discard changes?');
+      })
+    );
   }
 
   onChangeProductCategory(event: MatSelectChange): void {
@@ -83,10 +98,7 @@ export class ProductFormComponent implements OnInit, CanComponentDeactivate {
   }
 
   private loadProduct(): void {
-    this.route.data.pipe(pluck('product')).subscribe((product: ProductModel) => {
-      this.product = {...product};
-      this.originalProduct = {...product};
-      this.selectedProductCategory = product.category;
-    });
+    this.sub = this.productsFacade.selectSelectedProductByUrl()
+      .subscribe(product => this.product = { ...product });
   }
 }

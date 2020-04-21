@@ -1,6 +1,15 @@
 import { ProductCategory } from '../enums/product-category.enum';
 
-export class ProductModel {
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  category: ProductCategory;
+  isAvailable: boolean;
+}
+
+export class ProductModel implements Product {
   constructor(
     public id: number,
     public name: string,

@@ -1,5 +1,5 @@
 <form>
-  <div *ngFor="let product of data$ | async">
+  <div *ngFor="let product of (data$ | async)">
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{product.name}}</mat-card-title>

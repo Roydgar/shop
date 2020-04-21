@@ -12,7 +12,7 @@ import { OrdersModule } from './orders/orders.module';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { SharedModule } from './shared/shared.module';
 import { LayoutModule } from './layout/layout.module';
-import { httpInterceptorProviders } from './core/interceptors';
+import { RootStoreModule } from './core/@ngrx/root-store.module';
 
 @NgModule({
   declarations: [
@@ -28,10 +28,10 @@ import { httpInterceptorProviders } from './core/interceptors';
     AboutModule,
     OrdersModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RootStoreModule
   ],
   providers: [
-    httpInterceptorProviders,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 4000}}
   ],
   bootstrap: [AppComponent]

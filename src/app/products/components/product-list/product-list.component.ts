@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductModel } from '../../models/product.model';
+import { Product, ProductModel } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../../shared';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MessageSnackbarComponent } from '../../../shared/components';
+import { ProductsFacade } from '../../../core/@ngrx/products/products.facade';
+import { RouterFacade } from '../../../core/@ngrx/router/router.facade';
 
 @Component({
   selector: 'app-product-list',
@@ -14,16 +16,18 @@ import { MessageSnackbarComponent } from '../../../shared/components';
 })
 export class ProductListComponent implements OnInit {
 
-  data$: Observable<ProductModel[]>;
+  products$: Observable<ReadonlyArray<Product>>;
+  error$: Observable<Error | string>;
 
-  constructor(private productService: ProductService,
-              private cartService: CartService,
-              private router: Router,
-              private snackBar: MatSnackBar) {
+  constructor(private cartService: CartService,
+              private routerFacade: RouterFacade,
+              private snackBar: MatSnackBar,
+              private productsFacade: ProductsFacade) {
   }
 
   ngOnInit(): void {
-    this.data$ = this.productService.getProducts();
+    this.products$ = this.productsFacade.products$;
+    this.error$ = this.productsFacade.productsError;
   }
 
   onBuy(event: Event, product: ProductModel): void {
@@ -36,7 +40,7 @@ export class ProductListComponent implements OnInit {
 
   onViewInfo(event: Event, product: ProductModel) {
     event.preventDefault();
-    const link = ['/products', product.id];
-    this.router.navigate(link);
+    const path = ['/products', product.id];
+    this.routerFacade.navigate({ path });
   }
 }
