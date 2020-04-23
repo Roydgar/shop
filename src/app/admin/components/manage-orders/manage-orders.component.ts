@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService } from '../../../orders';
+import { Order } from '../../../orders';
 import { OrderModel } from '../../../orders';
+import { EntityCollectionService, EntityServices } from '@ngrx/data';
+import { Observable } from 'rxjs';
+import { orderEntityName } from '../../../core/@ngrx/data/entity-store.module';
 
 @Component({
   selector: 'app-manage-orders',
@@ -9,9 +12,12 @@ import { OrderModel } from '../../../orders';
 })
 export class ManageOrdersComponent implements OnInit {
 
-  data$: Promise<OrderModel[]>;
+  data$: Observable<OrderModel[]>;
 
-  constructor(private orderService: OrderService) {
+  private orderService: EntityCollectionService<Order>;
+
+  constructor(entityServices: EntityServices) {
+    this.orderService = entityServices.getEntityCollectionService(orderEntityName);
   }
 
   ngOnInit(): void {
@@ -19,6 +25,6 @@ export class ManageOrdersComponent implements OnInit {
   }
 
   private loadOrders() {
-    this.data$ = this.orderService.getOrders();
+    this.data$ = this.orderService.getAll();
   }
 }

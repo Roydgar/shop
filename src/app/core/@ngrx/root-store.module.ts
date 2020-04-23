@@ -8,7 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { RouterSerializer } from './router/router.serializer';
 import { routerFeatureKey, routerReducers } from './router/router.reducer';
-import { RouterEffects } from './router/router.effects';
+import { EntityStoreModule } from './data/entity-store.module';
 
 
 @NgModule({
@@ -21,13 +21,14 @@ import { RouterEffects } from './router/router.effects';
         strictActionImmutability: true,
         strictStateSerializability: true,
         strictActionSerializability: false
-      },
+      }
     }),
     StoreRouterConnectingModule.forRoot({
       stateKey: routerFeatureKey,
       serializer: RouterSerializer
     }),
-    EffectsModule.forRoot([RouterEffects]),
+    EffectsModule.forRoot([]),
+    EntityStoreModule,
     ProductsStoreModule,
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ]

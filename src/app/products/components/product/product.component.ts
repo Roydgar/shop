@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductModel } from '../../models/product.model';
-import { ActivatedRoute } from '@angular/router';
+import { ProductsFacade } from '../../../core/@ngrx/products/products.facade';
 import { Location } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ export class ProductComponent implements OnInit {
 
   product: ProductModel;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private productsFacade: ProductsFacade,
               private location: Location) {
   }
 
@@ -25,8 +25,7 @@ export class ProductComponent implements OnInit {
   }
 
   private loadProduct(): void {
-    this.route.data.subscribe((data: { product: ProductModel }) => {
-      this.product = data.product;
-    });
+    this.productsFacade.selectSelectedProductByUrl()
+      .subscribe(product => this.product = product);
   }
 }

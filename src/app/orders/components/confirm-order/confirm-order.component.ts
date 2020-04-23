@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderModel } from '../../model/order.model';
-import { OrderService } from '../../services/order.service';
-import { Location } from '@angular/common';
+import { Order, OrderModel } from '../../model/order.model';
+import { OrderComposer } from '../../services/order-composer.service';
 import { MessageSnackbarComponent } from '../../../shared/components';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { EntityCollectionService, EntityServices } from '@ngrx/data';
+import { orderEntityName } from '../../../core/@ngrx/data/entity-store.module';
 
 @Component({
   selector: 'app-confirm-order-component',
@@ -14,11 +16,14 @@ import { Router } from '@angular/router';
 export class ConfirmOrderComponent implements OnInit {
 
   order: OrderModel;
+  private orderService: EntityCollectionService<Order>;
 
-  constructor(private orderService: OrderService,
+  constructor(private router: Router,
               private location: Location,
-              private router: Router,
-              private snackBar: MatSnackBar,) {
+              private orderComposer: OrderComposer,
+              private snackBar: MatSnackBar,
+              entityServices: EntityServices) {
+    this.orderService = entityServices.getEntityCollectionService(orderEntityName);
   }
 
   ngOnInit(): void {
@@ -26,7 +31,7 @@ export class ConfirmOrderComponent implements OnInit {
   }
 
   confirmOrder(): void {
-    this.orderService.createOrder(this.order);
+    this.orderService.add(this.order);
     this.snackBar.openFromComponent(MessageSnackbarComponent, {
       data: 'Your order was created!'
     });
@@ -39,6 +44,6 @@ export class ConfirmOrderComponent implements OnInit {
   }
 
   private composeOrder() {
-    this.order = this.orderService.composeOrderFromCart();
+    this.order = this.orderComposer.composeOrderFromCart();
   }
 }

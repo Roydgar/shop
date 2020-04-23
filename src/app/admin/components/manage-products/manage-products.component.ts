@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductModel, ProductService } from '../../../products';
+import { ProductModel } from '../../../products';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsFacade } from '../../../core/@ngrx/products/products.facade';
-import { RouterFacade } from '../../../core/@ngrx/router/router.facade';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-manage-products',
@@ -15,8 +15,8 @@ export class ManageProductsComponent implements OnInit {
   data$: Observable<ReadonlyArray<ProductModel>>;
 
   constructor(private productsFacade: ProductsFacade,
-              private routerFacade: RouterFacade,
               private router: Router,
+              private location: Location,
               private route: ActivatedRoute) {
   }
 
@@ -25,13 +25,10 @@ export class ManageProductsComponent implements OnInit {
   }
 
   onEdit(product: ProductModel) {
-    console.log(product.id);
-    // this.routerFacade.navigate({path: ['edit', product.id], extras: {relativeTo: this.route}});
-    this.router.navigate(['edit', product.id], {relativeTo: this.route});
+    this.router.navigate(['edit', product.id], { relativeTo: this.route });
   }
 
   onAddNewProduct() {
-    this.router.navigate(['add'], {relativeTo: this.route});
-    // this.routerFacade.navigate({path: ['add'], extras: {relativeTo: this.route}});
+    this.router.navigate(['add'], { relativeTo: this.route });
   }
 }

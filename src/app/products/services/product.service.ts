@@ -29,13 +29,6 @@ export class ProductService {
     );
   }
 
-  getProductById(id: number): Observable<ProductModel> {
-    const url = this.baseUrl + '/' + id;
-    return this.http.get<ProductModel>(url).pipe(
-      catchError(ProductService.handleError)
-    );
-  }
-
   createProduct(product: ProductModel): Observable<ProductModel> {
     const url = `${this.baseUrl}`;
     const body = JSON.stringify(product);

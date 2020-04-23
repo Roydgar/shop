@@ -5,7 +5,6 @@ import { AdminDashboardComponent } from './components';
 import { ManageProductsComponent } from './components/manage-products/manage-products.component';
 import { CanDeactivateGuard } from '../core';
 import { ProductFormComponent } from './components/manage-products';
-import { ProductResolveGuard } from '../products';
 import { AuthGuard } from '../core';
 import { ManageOrdersComponent } from './components';
 import { ProductsStatePreloadingGuard } from '../products/guards/products-state-preloading.guard';
@@ -37,9 +36,6 @@ const routes: Routes = [
                 path: 'edit/:productID',
                 component: ProductFormComponent,
                 canDeactivate: [CanDeactivateGuard],
-                resolve: {
-                  product: ProductResolveGuard
-                }
               },
               {
                 path: '',

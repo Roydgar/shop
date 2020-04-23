@@ -1,9 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductModel } from '../../../../products';
 import { ProductCategory } from '../../../../products';
-import { ActivatedRoute, UrlTree } from '@angular/router';
-import { Location } from '@angular/common';
-  import { pluck, switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { DialogService } from '../../../../core';
 import { CanComponentDeactivate } from '../../../../core';
@@ -12,7 +10,8 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MessageSnackbarComponent } from '../../../../shared/components';
 import { ProductsFacade } from '../../../../core/@ngrx/products/products.facade';
-import { RouterFacade } from '../../../../core/@ngrx/router/router.facade';
+import { Location } from '@angular/common';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-form',
@@ -22,6 +21,7 @@ import { RouterFacade } from '../../../../core/@ngrx/router/router.facade';
 export class ProductFormComponent implements OnInit, OnDestroy, CanComponentDeactivate {
 
   product: ProductModel;
+  originalProduct: ProductModel;
 
   selectedProductCategory: ProductCategory;
   productCategoryKeys = Object.keys(ProductCategory);
@@ -30,7 +30,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
   constructor(private route: ActivatedRoute,
               private productsFacade: ProductsFacade,
-              private routerFacade: RouterFacade,
+              private location: Location,
               private dialogService: DialogService,
               private snackBar: MatSnackBar) {
   }
@@ -44,7 +44,7 @@ export class ProductFormComponent implements OnInit, OnDestroy, CanComponentDeac
   }
 
   onGoBack() {
-    this.routerFacade.goBack();
+    this.location.back();
   }
 
   onSave() {
@@ -56,36 +56,15 @@ export class ProductFormComponent implements OnInit, OnDestroy, CanComponentDeac
       this.productsFacade.createProduct(product);
     }
 
-    this.snackBar.openFromComponent(MessageSnackbarComponent, {
-      data: 'Product was Saved!'
-    });
+    this.originalProduct = product;
+    this.snackBar.openFromComponent(MessageSnackbarComponent, { data: 'Product was Saved!'});
     this.onGoBack();
   }
 
-  canDeactivate():
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    const flags = [];
-
-    return this.productsFacade.selectOriginalProduct().pipe(
-      switchMap(originalProduct => {
-        for (const key in originalProduct) {
-          if (originalProduct[key] === this.product[key]) {
-            flags.push(true);
-          } else {
-            flags.push(false);
-          }
-        }
-
-        if (flags.every(el => el)) {
-          return of(true);
-        }
-
-        return this.dialogService.confirm('Discard changes?');
-      })
-    );
+  canDeactivate(): Observable<boolean> {
+    return JSON.stringify(this.product) === JSON.stringify(this.originalProduct)
+      ? of(true)
+      : this.dialogService.confirm('Discard changes?');
   }
 
   onChangeProductCategory(event: MatSelectChange): void {
@@ -99,6 +78,10 @@ export class ProductFormComponent implements OnInit, OnDestroy, CanComponentDeac
 
   private loadProduct(): void {
     this.sub = this.productsFacade.selectSelectedProductByUrl()
-      .subscribe(product => this.product = { ...product });
+      .pipe(take(1))
+      .subscribe(product => {
+        this.product = { ...product };
+        this.originalProduct = { ...product};
+      });
   }
 }

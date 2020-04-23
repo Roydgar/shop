@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductComponent, ProductListComponent } from './components';
-import { ProductResolveGuard } from './guards/product-resolve.guard';
+import { ProductComponent} from './components/product/product.component';
+import { ProductListComponent} from './components/product-list/product-list.component';
+
 import { ProductsStatePreloadingGuard } from './guards/products-state-preloading.guard';
 import { CheckProductExistingGuard } from './guards/check-product-existing-guard.service';
 
@@ -18,9 +19,6 @@ const routes: Routes = [
         path: ':productID',
         component: ProductComponent,
         canActivate: [CheckProductExistingGuard],
-        resolve: {
-          product: ProductResolveGuard
-        }
       },
     ]
   }

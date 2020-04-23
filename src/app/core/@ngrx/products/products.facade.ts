@@ -4,7 +4,6 @@ import { Product, ProductModel } from '../../../products';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../app.state';
 import {
-  selectOriginalProduct,
   selectProductsData,
   selectProductsError,
   selectSelectedProductByUrl
@@ -33,9 +32,5 @@ export class ProductsFacade {
 
   selectSelectedProductByUrl(): Observable<ProductModel> {
     return this.store.pipe(select(selectSelectedProductByUrl));
-  }
-
-  selectOriginalProduct(): Observable<ProductModel> {
-    return this.store.pipe(select(selectOriginalProduct));
   }
 }

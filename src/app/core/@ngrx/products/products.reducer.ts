@@ -59,7 +59,6 @@ export const reducer = createReducer(
     return {
       ...state,
       data,
-      // originalProduct: createdProduct,
       loading: false,
       loaded: true
     };
@@ -75,7 +74,6 @@ export const reducer = createReducer(
     return {
       ...state,
       data,
-      originalProduct: updatedProduct,
       loading: false,
       loaded: true
     };

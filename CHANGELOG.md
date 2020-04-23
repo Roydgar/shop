@@ -9,3 +9,12 @@
 * Custom 'order-by.pipe.ts' pipe to sort cart items in 'cart-list.component.html'
 * 'orderByOptionEnum' and 'SortDirectionEnum'
 * 'CommonModule' export from SharedModule.
+
+## Hometask 7
+### Added:
+* Ngrx state for 'Product' entity;
+* Actions, reducers, effects and selectors to work with 'Product' entity;
+* Router store in order to select router data. Is used to select 'Product' entity by id in the url from the store.
+* Ngrx Entity and Ngrx Data for the 'Order' entity;
+* Refactored components connected with 'Product' and 'Order'.
+
