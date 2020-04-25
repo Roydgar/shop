@@ -24,7 +24,7 @@
 * ProcessOrderComponent;
 * ProcessOrderValidationService;
 * CustomValidators class;
-* EmailExists async directive;
+* EmailExists async directive. The test email is 'existsemail@example.com';
 * Routing to ProcessOrderComponent. To reach this form you need to buy a
 product, go to the cart and confirm your selections;
 * ProcessOrderComponent added to '/home' route due to demonstration purposes.
