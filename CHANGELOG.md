@@ -9,3 +9,13 @@
 * Custom 'order-by.pipe.ts' pipe to sort cart items in 'cart-list.component.html'
 * 'orderByOptionEnum' and 'SortDirectionEnum'
 * 'CommonModule' export from SharedModule.
+
+## Hometask 8
+### Added:
+* ProcessOrderComponent;
+* ProcessOrderValidationService;
+* CustomValidators class;
+* EmailExists async directive;
+* Routing to ProcessOrderComponent. To reach this form you need to buy a
+product, go to the cart and confirm your selections;
+* ProcessOrderComponent added to '/home' route due to demonstration purposes.

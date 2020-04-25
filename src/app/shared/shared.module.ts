@@ -19,6 +19,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
+import { ValidatorsModule } from '../validators/validators.module';
 
 @NgModule({
   declarations: [ElementHighlightDirective, BorderOnMouseLeaveDirective, OrderByPipe, MessageSnackbarComponent],
@@ -42,7 +43,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDividerModule,
     OrderByPipe,
     MessageSnackbarComponent,
-    CommonModule
+    CommonModule,
+    ValidatorsModule
   ],
   imports: [
     CommonModule

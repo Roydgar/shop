@@ -31,7 +31,7 @@ export class ConfirmOrderComponent implements OnInit {
       data: 'Your order was created!'
     });
 
-    this.router.navigate(['/home']);
+    this.router.navigate(['/order/process']);
   }
 
   onGoBack() {
