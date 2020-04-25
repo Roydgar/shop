@@ -4,11 +4,12 @@ import { PathNotFoundComponent } from './layout';
 import { AboutAppComponent } from './about';
 import { LoginComponent } from './layout';
 import { AuthGuard } from './core';
+import { ProcessOrderComponent } from './orders/components/process-order/process-order.component';
 
 const routes: Routes = [
   {
     path: 'home',
-    component: AboutAppComponent
+    component: ProcessOrderComponent
   },
   {
     path: 'login',

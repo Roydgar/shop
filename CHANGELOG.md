@@ -18,3 +18,13 @@
 * Ngrx Entity and Ngrx Data for the 'Order' entity;
 * Refactored components connected with 'Product' and 'Order'.
 
+
+## Hometask 8
+### Added:
+* ProcessOrderComponent;
+* ProcessOrderValidationService;
+* CustomValidators class;
+* EmailExists async directive;
+* Routing to ProcessOrderComponent. To reach this form you need to buy a
+product, go to the cart and confirm your selections;
+* ProcessOrderComponent added to '/home' route due to demonstration purposes.

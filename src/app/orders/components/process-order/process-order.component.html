@@ -1,0 +1,76 @@
+<h1 class="title">Process Order</h1>
+<div class="form-container">
+  <form (ngSubmit)="onSave()" [formGroup]="form">
+
+    <mat-form-field appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput [formControlName]="fields.FIRST_NAME" (blur)="onControlBlur(fields.FIRST_NAME)">
+    </mat-form-field>
+
+    <mat-error *ngIf="validationMessages[fields.FIRST_NAME]">
+      {{ validationMessages[fields.FIRST_NAME] }}
+    </mat-error>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput [formControlName]="fields.LAST_NAME" (blur)="onControlBlur(fields.LAST_NAME)">
+    </mat-form-field>
+
+    <mat-error *ngIf="validationMessages[fields.LAST_NAME]">
+      {{ validationMessages[fields.LAST_NAME] }}
+    </mat-error>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput [formControlName]="fields.EMAIL" appEmailExistsValidator (blur)="onControlBlur(fields.EMAIL)">
+    </mat-form-field>
+
+    <mat-error *ngIf="validationMessages[fields.EMAIL]">
+      {{ validationMessages[fields.EMAIL] }}
+    </mat-error>
+    <br>
+
+
+    <div [formArrayName]="fields.PHONES">
+      <div *ngFor="let phone of phones.controls; let i = index" [formGroupName]="i">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Phone</mat-label>
+          <input matInput [formControlName]="fields.PHONE" (blur)="onArrayControlBlur(phones, fields.PHONE, i)">
+        </mat-form-field>
+
+        <br>
+        <button mat-button type="button" *ngIf="i > 0" (click)="onDeletePhone(i, fields.PHONE)">Delete Phone</button>
+
+        <mat-error *ngIf="validationMessages[fields.PHONE][i]">
+          {{ validationMessages[fields.PHONE][i] }}
+        </mat-error>
+
+      </div>
+
+      <button mat-button type="button" (click)="onAddPhone()">Add another phone</button>
+      <br>
+    </div>
+
+
+    <mat-checkbox [formControlName]="fields.DELIVERY_REQUIRED">Delivery Required?</mat-checkbox>
+    <br>
+    <br>
+
+    <div *ngIf="form.get(fields.DELIVERY_REQUIRED).value">
+      <mat-form-field appearance="fill">
+        <mat-label>Delivery Address</mat-label>
+        <input matInput [formControlName]="fields.DELIVERY_ADDRESS" (blur)="onControlBlur(fields.DELIVERY_ADDRESS)">
+      </mat-form-field>
+
+      <mat-error *ngIf="validationMessages[fields.DELIVERY_ADDRESS]">
+        {{ validationMessages[fields.DELIVERY_ADDRESS] }}
+      </mat-error>
+      <br>
+    </div>
+
+    <button mat-button type="submit" [disabled]="form.invalid">Save</button>
+  </form>
+</div>
