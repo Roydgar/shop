@@ -45,7 +45,7 @@ export class ProcessOrderComponent implements OnInit, OnDestroy {
 
   onArrayControlBlur(formArray: FormArray, controlName: string, controlIndex: number): void {
     const control = formArray.at(controlIndex).get(controlName);
-    this.validationService.setValidationMessageArray(control, controlName, controlIndex);
+    this.validationService.setValidationMessageWithIndex(control, controlName, controlIndex);
   }
 
   buildForm(): void {
@@ -85,7 +85,7 @@ export class ProcessOrderComponent implements OnInit, OnDestroy {
 
   onDeletePhone(index: number, controlName: string): void {
     this.phones.removeAt(index);
-    this.validationService.deleteValidationMessageArray(controlName, index);
+    this.validationService.deleteValidationMessage(controlName, index);
   }
 
   get phones(): FormArray {

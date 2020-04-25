@@ -50,12 +50,12 @@ export class ProcessOrderValidationService {
     this.validationMessages[controlName] = this.createValidationMessage(control, controlName);
   }
 
-  public setValidationMessageArray(c: AbstractControl, controlName: string, index: number): void {
+  public setValidationMessageWithIndex(c: AbstractControl, controlName: string, index: number): void {
     const message = this.createValidationMessage(c, controlName);
     this.validationMessages[controlName] = { ...this.validationMessages[controlName] , [index]: message };
   }
 
-  public deleteValidationMessageArray(controlName: string, index: number): void {
+  public deleteValidationMessage(controlName: string, index: number): void {
     const { [index]: removed, ...validationMessages } = this.validationMessages[controlName];
     this.validationMessages[controlName] = validationMessages;
   }
