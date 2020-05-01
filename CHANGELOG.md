@@ -35,3 +35,14 @@ product, go to the cart and confirm your selections;
 * product.service.spec.ts
 * order-by.pipe.spec.ts
 * product.component.spec.ts
+* Coverage report: TOTAL: 12 SUCCESS
+                   TOTAL: 12 SUCCESS
+                   TOTAL: 12 SUCCESS
+                   
+                   =============================== Coverage summary ===============================
+                   Statements   : 41% ( 98/239 )
+                   Branches     : 15% ( 3/20 )
+                   Functions    : 17.98% ( 16/89 )
+                   Lines        : 37.68% ( 78/207 )
+                   ================================================================================
+
