@@ -28,3 +28,10 @@
 * Routing to ProcessOrderComponent. To reach this form you need to buy a
 product, go to the cart and confirm your selections;
 * ProcessOrderComponent added to '/home' route due to demonstration purposes.
+
+## Hometask 9
+### Added:
+* app.component.spec.ts
+* product.service.spec.ts
+* order-by.pipe.spec.ts
+* product.component.spec.ts
