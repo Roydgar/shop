@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +11,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  onActivate(event: any, routerOutlet: RouterOutlet) {
-    console.log('Activated component ', event, routerOutlet);
-  }
-
-  onDeactivate(event: any, routerOutlet: RouterOutlet) {
-    console.log('Deactivated component ', event, routerOutlet);
   }
 }
