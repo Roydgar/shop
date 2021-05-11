@@ -27,7 +27,7 @@
     "@ngrx/schematics": "^9.1.0",
     "@ngrx/store": "latest",
     "@ngrx/store-devtools": "latest",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
